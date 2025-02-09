@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Día de Servicio</title>
+</head>
+<body>
+    <h1>Detalles del Día de Servicio</h1>
+    <p><strong>Fecha del Servicio:</strong> {{ dia_servicio.fecha_servicio }}</p>
+    <p><strong>Tipo de Servicio:</strong> {{ dia_servicio.tipo_de_servicio }}</p>
+    <p><strong>Pastor:</strong> {{ dia_servicio.pastor }}</p>
+    <p><strong>Tema:</strong> {{ dia_servicio.tema }}</p>
+    <p><strong>Versículo Base:</strong> {{ dia_servicio.versiculo_base }}</p>
+    <p><strong>Número de Sillas:</strong> {{ dia_servicio.numero_de_sillas }}</p>
+    <p><strong>Número de Asistencia:</strong> {{ dia_servicio.numero_de_asistencia }}</p>
+    <p><strong>Número de Carros:</strong> {{ dia_servicio.numero_de_carros }}</p>
+    <p><strong>Número de Motos:</strong> {{ dia_servicio.numero_de_motos }}</p>
+    <p><strong>Número de Bicicletas:</strong> {{ dia_servicio.numero_de_bicicletas }}</p>
+    <p><strong>Merienda:</strong> {{ dia_servicio.merienda }}</p>
+    <p><strong>Número de Meriendas Servidas:</strong> {{ dia_servicio.numero_de_meriendas }}</p>
+    <p><strong>Observaciones:</strong> {{ dia_servicio.observaciones_reunion }}</p>
+
+    <a href="{% url 'editar_dia_servicio' dia_servicio.id %}">Editar</a>
+</body>
+</html>

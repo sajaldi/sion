@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Materiales</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h3>Lista de Materiales</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Producto</th>
+                <th>Comentario</th>
+                <th>Requisición</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{each(Items, item => `
+            <tr>
+                <td>@{item['cr8ca_cantidad']}</td>
+                <td>@{item['material']}</td>
+                <td>@{item['cr8ca_comentarios']}</td>
+                <td>@{item['requisicion']}</td>
+            </tr>
+            `)}
+        </tbody>
+    </table>
+</body>
+</html>

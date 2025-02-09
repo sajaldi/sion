@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Día de Servicio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #f9f9f9;
+        }
+        .asistencias-two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .asistencia-column {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .asistencia-column p {
+            margin: 5px 0;
+        }
+        .asistencia-column p strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Informe Día de Servicio</h1>
+
+    <div class="section">
+        <h2>Detalles del Día de Servicio</h2>
+        <table class="table">
+            <tr>
+                <th>Fecha</th>
+                <td>{{ dia_servicio.fecha_servicio }}</td>
+            </tr>
+            <tr>
+                <th>Tipo de Servicio</th>
+                <td>{{ dia_servicio.tipo_de_servicio }}</td>
+            </tr>
+            <tr>
+                <th>Pastor</th>
+                <td>{{ dia_servicio.pastor }}</td>
+            </tr>
+            <tr>
+                <th>Tema</th>
+                <td>{{ dia_servicio.tema }}</td>
+            </tr>
+            <tr>
+                <th>Versículo Base</th>
+                <td>{{ dia_servicio.versiculo_base }}</td>
+            </tr>
+            <tr>
+                <th>Número de Sillas</th>
+                <td>{{ dia_servicio.numero_de_sillas }}</td>
+            </tr>
+            <tr>
+                <th>Número de Asistencia</th>
+                <td>{{ dia_servicio.numero_de_asistencia }}</td>
+            </tr>
+            <tr>
+                <th>Número de Carros</th>
+                <td>{{ dia_servicio.numero_de_carros }}</td>
+            </tr>
+            <tr>
+                <th>Número de Motos</th>
+                <td>{{ dia_servicio.numero_de_motos }}</td>
+            </tr>
+            <tr>
+                <th>Número de Bicicletas</th>
+                <td>{{ dia_servicio.numero_de_bicicletas }}</td>
+            </tr>
+            <tr>
+                <th>Merienda</th>
+                <td>{{ dia_servicio.merienda }}</td>
+            </tr>
+            <tr>
+                <th>Número de Meriendas Servidas</th>
+                <td>{{ dia_servicio.numero_de_meriendas }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Visitas</h2>
+        <div class="asistencias-two-columns">
+            {% for visita in visitas %}
+                <div class="asistencia-column">
+                    <p><strong>{{ visita.nombre }}</strong></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Anuncios</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Anuncio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for anuncio in anuncios %}
+                    <tr>
+                        <td>{{ anuncio.fecha }} {{ anuncio.hora }}</td>
+                        <td>{{ anuncio.anuncio }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Asistencias que Asistieron al Servicio o al Aseo -->
+    <div class="section">
+        <h2>Asistencias</h2>
+        <h3>Asistieron al Servicio o al Aseo</h3>
+        <div class="asistencias-two-columns">
+            {% for asistencia in asistencias %}
+                {% if asistencia.servicio or asistencia.aseo %}
+                    <div class="asistencia-column">
+                        <p><strong>{{ asistencia.miembro.nombre }}</strong></p>
+                        {% if asistencia.servicio %}
+                            <p>✔ Servicio</p>
+                        {% endif %}
+                        {% if asistencia.aseo %}
+                            <p>✔ Aseo</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Observaciones de la reunión -->
+    <div class="section">
+        <h2>Observaciones de la Reunión</h2>
+        <div class="asistencia-column">
+            <p>{{ dia_servicio.observaciones_reunion }}</p>
+        </div>
+    </div>
+
+</body>
+</html>

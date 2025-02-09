@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Día de Servicio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 900px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .form-section {
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .column {
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .observaciones {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Día de Servicio</h1>
+
+        <form method="POST" action="{% url 'editar_dia_servicio' dia_servicio.id %}">
+            {% csrf_token %}
+            <div class="form-section">
+                <h2>Detalles del Día de Servicio</h2>
+
+                <div class="form-group">
+                    <label for="fecha_servicio">Fecha</label>
+                    <input type="date" id="fecha_servicio" name="fecha_servicio" value="{{ dia_servicio.fecha_servicio|date:'Y-m-d' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo_de_servicio">Tipo de Servicio</label>
+                    <select id="tipo_de_servicio" name="tipo_de_servicio" required>
+                        {% for tipo in tipos_de_servicio %}
+                            <option value="{{ tipo.id }}" {% if tipo.id == dia_servicio.tipo_de_servicio.id %}selected{% endif %}>{{ tipo.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pastor">Pastor</label>
+                    <select id="pastor" name="pastor" required>
+                        {% for miembro in miembros %}
+                            <option value="{{ miembro.id }}" {% if miembro.id == dia_servicio.pastor.id %}selected{% endif %}>{{ miembro.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tema">Tema</label>
+                    <input type="text" id="tema" name="tema" value="{{ dia_servicio.tema }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="versiculo_base">Versículo Base</label>
+                    <input type="text" id="versiculo_base" name="versiculo_base" value="{{ dia_servicio.versiculo_base }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_de_sillas">Número de Sillas</label>
+                    <input type="number" id="numero_de_sillas" name="numero_de_sillas" value="{{ dia_servicio.numero_de_sillas }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_de_asistencia">Número de Asistencia</label>
+                    <input type="number" id="numero_de_asistencia" name="numero_de_asistencia" value="{{ dia_servicio.numero_de_asistencia }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_de_carros">Número de Carros</label>
+                    <input type="number" id="numero_de_carros" name="numero_de_carros" value="{{ dia_servicio.numero_de_carros }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_de_motos">Número de Motos</label>
+                    <input type="number" id="numero_de_motos" name="numero_de_motos" value="{{ dia_servicio.numero_de_motos }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_de_bicicletas">Número de Bicicletas</label>
+                    <input type="number" id="numero_de_bicicletas" name="numero_de_bicicletas" value="{{ dia_servicio.numero_de_bicicletas }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="merienda">Merienda</label>
+                    <input type="text" id="merienda" name="merienda" value="{{ dia_servicio.merienda }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_de_meriendas">Número de Meriendas Servidas</label>
+                    <input type="number" id="numero_de_meriendas" name="numero_de_meriendas" value="{{ dia_servicio.numero_de_meriendas }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="observaciones_reunion">Observaciones</label>
+                    <textarea id="observaciones_reunion" name="observaciones_reunion" class="observaciones">{{ dia_servicio.observaciones_reunion }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Actualizar Servicio">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+th.column-fecha_inicio, td.field-fecha_inicio {
+    width: 300px !important; /* Cambia el ancho según necesites */
+}
+/* Ajusta el ancho del campo observaciones_reunion */
+textarea#id_dias_servicio-0-observaciones_reunion {
+    width: 200px !important;  /* Cambia el ancho según tu necesidad */
+    height: 150px !important; /* Opcional: modifica la altura */
+}
